@@ -9,6 +9,11 @@ var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
+debugger;
+
+
+
+//fight functioin (now with parameter for enemy's name)
 var fight = function(enemyName) {
     while(playerHealth > 0 && enemyHealth > 0) {
       
@@ -25,13 +30,13 @@ var fight = function(enemyName) {
                         if (confirmSkip) {
                             window.alert(playerName + ' has decided to skip this fight. Goodbye!');
                     
-                        //subtract money from playerMoney for skipping
+                            //subtract money from playerMoney for skipping
                             playerMoney = playerMoney - 10;
-                            console.log("playerMoney", playerMoney);
+                            console.log("playerMoney", playerMoney)
                             break;
                     
                         }
-    }
+                    }
 
 
         
@@ -76,11 +81,20 @@ var fight = function(enemyName) {
                 window.alert(playerName + ' still has ' + playerHealth + ' health left.');
             }
             
-        }  
+    }  
         
 };
 
-    
+
+//function to start a new game
+var startGame = function() {
+
+    //reset player stats
+    playerHealth = 100;
+    playerAttack = 10;
+    playerMoney = 10;
+
+
    
   for(var i = 0; i < enemyNames.length; i++) {
 
@@ -108,5 +122,46 @@ var fight = function(enemyName) {
         break;
     }
 
- 
     }
+
+    endGame( );
+
+};
+
+//function to end the entire game
+var endGame = function () {
+    windowl.alert("The game has now ended. Let's see how you did!");
+    
+    //if player is still alive, player wins!
+    if (playerHealth > 0) {
+    
+        window.alert("Great job, you've survived the game! You now have a score of " + playerMoney + ".");
+    }
+    else{
+    
+        window.alert("You've lost your robot in battle.");
+    
+    }
+    
+    //ask player they'd like to play again
+    var playAgainConfirm = window.confirm("Would you like to play again?");
+
+    if (playAgainConfirm) {
+    
+        //restart the game
+        startGame();
+    }
+    
+    else {
+    
+        window.alert("Thank you for playing Robot Gladiators! Come back soon!");
+
+    }
+
+};
+
+
+
+
+//start the game when the page loads
+startGame();
